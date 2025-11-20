@@ -130,7 +130,11 @@ class A2aAgentExecutor(AgentExecutor):
 
             # Check if this is a LiteLLM JSON parsing error (common with Ollama models that don't support function calling)
             error_message = str(e)
-            if "JSONDecodeError" in error_message or "Unterminated string" in error_message or "APIConnectionError" in error_message:
+            if (
+                "JSONDecodeError" in error_message
+                or "Unterminated string" in error_message
+                or "APIConnectionError" in error_message
+            ):
                 # Check if it's related to function calling
                 if "function_call" in error_message.lower() or "json.loads" in error_message:
                     error_message = (
